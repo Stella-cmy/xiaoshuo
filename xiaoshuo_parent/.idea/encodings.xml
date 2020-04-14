@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaoshuo_common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaoshuo_dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaoshuo_pojo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaoshuo_service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaoshuo_web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xiaoshuo_web/src/main/java/com/oracle/xiaoshuo/controller/ShoppingController.java" charset="GBK" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

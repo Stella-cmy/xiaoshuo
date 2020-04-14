@@ -1,0 +1,8 @@
+com\itcast\xiaoshuo\dao\UserMiddelBookDao.class
+com\itcast\xiaoshuo\dao\ReadDao.class
+com\itcast\xiaoshuo\dao\BooksDao.class
+com\itcast\xiaoshuo\dao\SectionDao.class
+com\itcast\xiaoshuo\dao\ShoppingDao.class
+com\itcast\App.class
+com\itcast\xiaoshuo\dao\UserDao.class
+com\itcast\xiaoshuo\dao\PingLunDao.class

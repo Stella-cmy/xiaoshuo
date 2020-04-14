@@ -1,0 +1,55 @@
+.books{
+    width: 80%;
+    height: 100%;
+   // background: #00A1D2;
+    margin: 5px  auto;
+}
+.books li{
+    width: 18%;
+    height: 300px;
+    background: rgba(0,0,0,0.07);
+    margin: 10px;
+    border-radius: 5px;
+    float: left;
+}
+.books li img{
+    width: 80%;
+    height: 80%;
+    margin-top: 10px;
+    margin-left: 25px;
+    border: 1px solid #333333;
+    border-radius: 10px;
+}
+.books li p{
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+}
+.books li p:hover{
+    color: red;
+}
+.nav_bookType{
+    width: 81%;
+    height: 50px;
+    background:rgba(0,0,0,0.2) ;
+    margin: 5px auto;
+}
+.nav_bookType li{
+    width: 200px;
+    height: 50px;
+ // background: #00A1D2;
+    list-style: none;
+    float: left;
+    text-align: center;
+    margin-left: 4px;
+
+}
+.nav_bookType li:hover{
+    background: orangered;
+}
+.nav_bookType li a{
+    line-height: 50px;
+    font-size: 20px;
+}
+
+

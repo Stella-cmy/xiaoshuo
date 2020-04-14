@@ -1,0 +1,11 @@
+com\itcast\xiaoshuo\service\UserMiddelBookService.class
+com\itcast\xiaoshuo\service\UserService.class
+com\itcast\xiaoshuo\service\ReadService.class
+com\itcast\xiaoshuo\service\impl\UserServiceImpl.class
+com\itcast\xiaoshuo\service\BookService.class
+com\itcast\xiaoshuo\service\ShoppingService.class
+com\itcast\App.class
+com\itcast\xiaoshuo\service\impl\UserMiddelBookServiceImpl.class
+com\itcast\xiaoshuo\service\impl\ShoppingServiceImpl.class
+com\itcast\xiaoshuo\service\impl\ReadServiceImpl.class
+com\itcast\xiaoshuo\service\impl\BookServiceImpl.class

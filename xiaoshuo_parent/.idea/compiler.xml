@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="xiaoshuo_common" />
+        <module name="xiaoshuo_dao" />
+        <module name="xiaoshuo_pojo" />
+        <module name="xiaoshuo_service" />
+        <module name="xiaoshuo_web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="xiaoshuo_common" target="1.8" />
+      <module name="xiaoshuo_common (1)" target="1.8" />
+      <module name="xiaoshuo_dao" target="1.8" />
+      <module name="xiaoshuo_dao (1)" target="1.8" />
+      <module name="xiaoshuo_parent" target="1.8" />
+      <module name="xiaoshuo_parent (1)" target="1.8" />
+      <module name="xiaoshuo_pojo" target="1.8" />
+      <module name="xiaoshuo_pojo (1)" target="1.8" />
+      <module name="xiaoshuo_service" target="1.8" />
+      <module name="xiaoshuo_service (1)" target="1.8" />
+      <module name="xiaoshuo_web" target="1.8" />
+      <module name="xiaoshuo_web (1)" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

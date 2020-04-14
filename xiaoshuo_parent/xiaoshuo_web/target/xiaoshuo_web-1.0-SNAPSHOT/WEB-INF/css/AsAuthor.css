@@ -1,0 +1,78 @@
+.zhuti{
+    width: 80%;
+    height: 400px;
+   // background: #3297d8;
+    margin: 10px auto;
+}
+.tupian{
+    width: 20%;
+    height: 300px;
+   // background: #ed145b;
+    margin: 20px;
+    float: left;
+}
+.tupian img{
+    width: 100%;
+    height: 100%;
+  border: 1px solid #CCCCCC;
+    border-radius: 5px;
+
+}
+.jianjie{
+    width: 72%;
+    height: 260px;
+  //  background: #ed145b;
+    float: left;
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 1px solid #333333;
+    padding: 20px;
+}
+.see{
+    width: 100%;
+    height: 50px;
+  //  background: #98FB98;
+    float: left;
+}
+.see button{
+    width: 100px;
+    height: 30px;
+    background: #3297d8;
+    color: white;
+}
+.see button:hover{
+    background: rosybrown;
+}
+.text_pinglun{
+    width: 70%;
+    height: 120px;
+    //background: #ed145b;
+    float: left;
+   margin-left: 300px;
+    display: none;
+}
+.text_pinglun input{
+    width: 80%;
+    height: 100px;
+    background: #ffffff;
+    border: 1px solid #CCCCCC;
+
+}
+.tijiao{
+    width: 10%;
+    height: 30px;
+}
+.read{
+    width: 77%;
+    height: 100%;
+    margin-top: 30px;
+    background: rgba(0,0,0,0.2);
+    padding: 30px;
+    font-size: 20px;
+    float: left;
+   margin-left: 160px;
+    border: 1px solid #CCCCCC;
+    border-radius: 10px;
+    line-height: 35px;
+   //display: none;
+}

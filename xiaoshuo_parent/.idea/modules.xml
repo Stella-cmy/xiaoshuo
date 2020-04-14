@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/xiaoshuo_common/xiaoshuo_common.iml" filepath="$PROJECT_DIR$/xiaoshuo_common/xiaoshuo_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xiaoshuo_dao/xiaoshuo_dao.iml" filepath="$PROJECT_DIR$/xiaoshuo_dao/xiaoshuo_dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xiaoshuo_parent.iml" filepath="$PROJECT_DIR$/xiaoshuo_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xiaoshuo_pojo/xiaoshuo_pojo.iml" filepath="$PROJECT_DIR$/xiaoshuo_pojo/xiaoshuo_pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xiaoshuo_service/xiaoshuo_service.iml" filepath="$PROJECT_DIR$/xiaoshuo_service/xiaoshuo_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xiaoshuo_web/xiaoshuo_web.iml" filepath="$PROJECT_DIR$/xiaoshuo_web/xiaoshuo_web.iml" />
+    </modules>
+  </component>
+</project>
