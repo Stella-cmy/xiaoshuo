@@ -2,9 +2,6 @@
 body,img,input,ul,li,h3,p,dl,dd ,dt{margin:0px;border:0px;padding:0px; font-family:"微软雅黑";list-style-type:none;}
 a{text-decoration:none;}
 
-/*广告样式*/
-#topOne{width:100%; height:20px; background:url(../images/one.gif) ; text-align:center;
-		cursor:pointer;/*相对定位*/}
 
 /*Top样式*/
 #Top{width:1000px; height:70px; margin:0px auto;/*水平距中*/ padding-top:-50px;}
@@ -67,7 +64,7 @@ a{text-decoration:none;}
 /*头部焦点  Flash 动画特效*/
 #Foucs{width:100%; height:419px; overflow:hidden;}
 #Foucs .FoucsCommon{width:1200px;height:419px;  margin:0px auto;}
-#Foucs .FoucsCommon .flash{width:820px; height:419px; background-image:url(../images/five.jpg);float:left;
+#Foucs .FoucsCommon .flash{width:820px; height:419px; background-image:url(../images/koujue.jpg);float:left;
 				position:relative;}
 
 #Foucs .FoucsCommon .flash a{width:71px;height:71px;display:block;display:none;
@@ -174,7 +171,6 @@ a{color:#2d374b;text-decoration:none}
 
 /* searchTxt */
 .searchBtn button,.searchTxt .searchMenu .searchSelected{
-	background-image:url(../images/searchbg.png);
 	background-repeat:no-repeat;}
 
 .searchTxt{

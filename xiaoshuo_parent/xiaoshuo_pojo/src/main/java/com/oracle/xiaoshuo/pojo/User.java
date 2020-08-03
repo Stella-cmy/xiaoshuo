@@ -10,6 +10,16 @@ public class User implements Serializable {
     private  Integer isWriter;
     private  String email;
     private Double myEarnings;
+    private String lastDate;
+    private String pic;
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
 
     public Integer getUserId() {
         return UserId;
@@ -67,6 +77,14 @@ public class User implements Serializable {
         this.myEarnings = myEarnings;
     }
 
+    public String getLastDate() {
+        return lastDate;
+    }
+
+    public void setLastDate(String lastDate) {
+        this.lastDate = lastDate;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -77,6 +95,8 @@ public class User implements Serializable {
                 ", isWriter=" + isWriter +
                 ", email='" + email + '\'' +
                 ", myEarnings=" + myEarnings +
+                ", lastDate=" + lastDate+
+                ", pic=" + pic+
                 '}';
     }
 }

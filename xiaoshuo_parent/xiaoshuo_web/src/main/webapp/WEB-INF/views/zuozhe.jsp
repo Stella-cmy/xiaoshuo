@@ -3,34 +3,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/basic.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HomePage.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/zuozhe.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.3.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
     <script language="JavaScript" type="text/javascript">
         $(function(){
             $("#new_Book").click(function(){
-                    var newBookName = document.getElementById("newBookName").value;
-                    var index =document.getElementById("newBookType").selectedIndex;
-                    var newBookType = document.getElementById("newBookType").options[index].value;
-                    var newzuozhe = document.getElementById("newzuozhe").value;
-                    var newjianjie = document.getElementById("newjianjie").value;
-                    var bianji = document.getElementById("bianji").innerHTML;
-                    $.post('${pageContext.request.contextPath}/zuozhe/saveMyBook',
-                        {
-                            'newBookName':newBookName,
-                            'newBookType':newBookType,
-                            'newzuozhe':newzuozhe,
-                            'newjianjie':newjianjie,
-                            'num':1,
-                            'bianji':bianji
-                        },
-                        function () {
-                            alert("提交成功");
-                            location.href='${pageContext.request.contextPath}/zuozhe/aszuozhe';
-                        }
-                    )
+                var file = document.getElementById("photo").value;
+                if(file=="")
+                {
+                    alert("请选择文件");
+                }
+                else
+                {
+                    var reg = ".*\\.(jpg|png|JPG|PNG)";
+                    var r = file.match(reg);
+                    if(r == null){
+                        alert("对不起，您的图片格式不正确，请重新上传");
+                    }
+                    else
+                    {
+                        var bianji = document.getElementById("bianji").innerHTML;
+                        $("#con").val(bianji);
+                        $("#newBookForm").submit();
+                        $.post(
+                            function () {
+                                location.href="${pageContext.request.contextPath}/mypage/bookrack";
+                            }
+                        )
+                    }
+                }
                 }
             );
             $("#update_submit").click(function(){
@@ -43,7 +49,7 @@
                         'sectionId': sectionId
                     },
                     function () {
-                        alert("修改成功！");
+                        alert("Update successfully!");
                         location.href='${pageContext.request.contextPath}/zuozhe/aszuozhe';
                     }
                 )
@@ -63,7 +69,7 @@
 
     <div class="user">
         <c:if test="${not empty user}">
-            欢迎您：${user.username}
+            <img src="${pageContext.request.contextPath}/images/${user.pic}" alt="" width="60px" height="60px"> ${user.username}
         </c:if>
         <c:if test="${empty user}">
             <font><a href="${pageContext.request.contextPath}/users/login">登录&nbsp;&nbsp;&nbsp;|</a></font>
@@ -89,10 +95,15 @@
     <div class="title_1">
         <h1>发表新文</h1>
     </div>
-    <form id="newBookForm" action="${pageContext.request.contextPath}/zuozhe/saveMyBook" method="post">
+    <form id="newBookForm" action="${pageContext.request.contextPath}/zuozhe/saveMyBook" method="post" enctype="multipart/form-data">
         <div class="writerBook">
-            小说名称：<input type="text" id="newBookName"/><br>
-            小说类型：<select id="newBookType">
+            小说名称：<input type="text" id="newBookName" name="newBookName"/>
+            <br>
+            <c:if test="${not empty errorMsg}">
+            <input type="text"  style="color:red" value="${errorMsg1}">
+            </c:if>
+            <br>
+            小说类型：<select id="newBookType" name="newBookType">
             <option value ="1">都市</option>
             <option value ="2">军事</option>
             <option value="3">历史</option>
@@ -100,9 +111,11 @@
             <option value="5">玄幻</option>
             <option value="6">游戏</option>
         </select><br>
-            <input hidden type="text" id="newzuozhe" value="${user.username}"/><br/>
-            小说简介：<input type="text" id="newjianjie"/><br/>
+            <input id="photo" type="file" name="photo"><br>
+            <input hidden type="text" id="newzuozhe" name="newzuozhe" value="${user.username}"/><br/>
+            小说简介：<input type="text" id="newjianjie" name="newjianjie"/><br/>
         </div>
+        <textarea hidden id="con" name="con"></textarea>
         <div class="bianji">
             <p contenteditable="plaintext-only" id="bianji">写下第一章吧</p>
             小说章节：1<input hidden id="zhuangjie" value="1">
@@ -125,6 +138,28 @@
         <p contenteditable="plaintext-only" id="p_sectionContext">${updateSection.sectionContent}</p>
     </div>
     <input type="button" value="提交" id="update_submit">
+    <c:if test="${not empty errorMsg}">
+        <input type="text"  style="color:red" value="${errorMsg}">
+    </c:if>
+    <br>
+    <br>
+    <div class="h21" onclick="see_pinglun()">
+        <h2>我收到的评论</h2>
+    </div>
+    <div class="pinglun&qianbao">
+    <div class="pinglun">
+        <c:if test="${not empty conmentsA}">
+            <ul>
+                <c:forEach items="${conmentsA}" var="conment" >
+                    <li>${conment.conment}</li>
+                </c:forEach>
+            </ul>
+        </c:if>
+        <c:if test="${empty conmentsA}">
+            <h1>&nbsp;&nbsp;暂无评论</h1>
+        </c:if>
+    </div>
+    </div>
     </c:if>
 </div>
 </body>

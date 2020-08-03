@@ -24,4 +24,7 @@ public interface UserMiddelBookDao {
     @Select("select * from user_middle_books where user_id=#{userId}")
     @ResultMap("UserMiddelBookMap")
     List<UserMiddelBook> findByUserId(@Param("userId") Integer userId);
+    @Select("select * from user_middle_books where book_id=#{bookId}")
+    @ResultMap("UserMiddelBookMap")
+    List<UserMiddelBook> findByBookId(@Param("bookId") Integer bookId);
 }

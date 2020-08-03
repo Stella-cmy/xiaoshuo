@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Conment implements  Serializable {
     private Integer conmentId;
+    private Integer replyId;
     private Integer userId;
     private Integer bookId;
     private String conment;
@@ -14,6 +15,14 @@ public class Conment implements  Serializable {
 
     public void setBookId(Integer bookId) {
         this.bookId = bookId;
+    }
+
+    public Integer getReplyId() {
+        return replyId;
+    }
+
+    public void setReplyId(Integer replyId) {
+        this.replyId = replyId;
     }
 
     public Integer getConmentId() {
@@ -44,6 +53,7 @@ public class Conment implements  Serializable {
     public String toString() {
         return "Conment{" +
                 "conmentId=" + conmentId +
+                ", replyId=" + replyId +
                 ", userId=" + userId +
                 ", bookId=" + bookId +
                 ", conment='" + conment + '\'' +

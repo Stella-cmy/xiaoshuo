@@ -12,12 +12,12 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserDao userDao;
 
     @Override
     public List<User> findAll() {
-
         List<User> users= userDao.findAll();
         return users;
     }
@@ -47,7 +47,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateBalance(User user)  {
             userDao.updateBalance(user.getUserId(),user.getBalance()-UserConstant.BOOK_PRICE);
-
         }
 
     @Override
@@ -63,6 +62,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateWriter(User user) {
         userDao.updateWriter(user,UserConstant.IS_WRITER);
+    }
+
+    @Override
+    public void updateMyEarnings(User user, Double myEarnings) {
+        userDao.updateMyEarnings(user.getUserId(),myEarnings);
+    }
+
+    @Override
+    public void flashBalance(User user, Integer newBalance) {
+        userDao.updateBalance(user.getUserId(),newBalance);
+    }
+    @Override
+    public void updateLastDate(Integer userId, String lastDate) {
+       userDao.updateLastDate(userId,lastDate);
+    }
+
+    @Override
+    public void updatePic(Integer userId, String pic) {
+        userDao.updatePic(userId,pic);
     }
 
     @Override

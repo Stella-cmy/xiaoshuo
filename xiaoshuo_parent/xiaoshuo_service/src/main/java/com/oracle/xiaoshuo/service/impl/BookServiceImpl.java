@@ -15,8 +15,18 @@ public class BookServiceImpl implements BookService {
         booksDao.updateAuthor(bookId,bookAutor);
     }
 
+    @Override
+    public void updateReadZhou(Integer bookId, Integer zhoubang) {
+        booksDao.updateReadZhou(bookId,zhoubang);
+    }
+
+    @Override
+    public void updateReadYue(Integer bookId, Integer yuebang) {
+        booksDao.updateReadYue(bookId,yuebang);
+    }
     @Autowired
     private BooksDao booksDao;
+
     @Override
     public Books findById(Integer bookId) {
         return booksDao.findById(bookId);
@@ -63,7 +73,6 @@ public class BookServiceImpl implements BookService {
     }
     public List<Books> findAllBooks() {
         List<Books> books=booksDao.findAllBooks();
-        System.out.println(books.size());
         return books;
     }
 }

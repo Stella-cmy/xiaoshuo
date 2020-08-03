@@ -20,4 +20,8 @@ public interface BookService {
     void saveMyBook(String bookName, Integer type, String zuozhe, String image, String jianjie);
 
     void updateAuthor(Integer bookId,String bookAutor);
+
+    void updateReadZhou(Integer bookId,Integer zhoubang);
+
+    void updateReadYue(Integer bookId,Integer yuebang);
 }

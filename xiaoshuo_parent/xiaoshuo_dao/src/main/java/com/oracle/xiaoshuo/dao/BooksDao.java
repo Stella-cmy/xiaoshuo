@@ -41,4 +41,8 @@ public interface BooksDao {
     void saveMyBook(@Param("bookName") String bookName,@Param("type") Integer type,@Param("zuozhe") String zuozhe,@Param("image") String image,@Param("jianjie") String jianjie);
     @Update("update books set book_autor=#{bookAutor} where book_id=#{bookId} ")
     void updateAuthor(@Param("bookId") Integer bookId,@Param("bookAutor") String bookAutor);
+    @Update("update books set read_zhoubang=#{readZhouBang} where book_id=#{bookId} ")
+    void updateReadZhou(@Param("bookId") Integer bookId,@Param("readZhouBang") Integer readZhouBang);
+    @Update("update books set read_yuebang=#{readYueBang} where book_id=#{bookId} ")
+    void updateReadYue(@Param("bookId") Integer bookId,@Param("readYueBang") Integer readYueBang);
 }

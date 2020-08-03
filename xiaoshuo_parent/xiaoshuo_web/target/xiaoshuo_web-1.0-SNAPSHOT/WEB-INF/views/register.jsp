@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,7 +13,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-image:url(${pageContext.request.contextPath}/WEB-INF/images/background.jpg);
+            background-image:url(${pageContext.request.contextPath}/images/background.jpg);
         }
         .wrapper{
             background-image: url("${pageContext.request.contextPath}/../img/bj.gif");
@@ -63,10 +63,22 @@
             text-align: center;}
 
     </style>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/layer/layer.js"></script>
 </head>
 <script>
+    function check() {
+        var username = document.getElementById("userName").value;
+        var password = document.getElementById("password").value;
+        var regex1 = new RegExp("^([a-zA-Z0-9_-]){5,8}$");
+        var regex = new RegExp("^(?!^(\\d+|[a-zA-Z]+|[~!@#$%^&*?]+)$)^[\\w~!@#$%^&*?]{8,12}$");
+        if(regex.test(password)==false||regex1.test(username)==false)
+        {
+            alert("The username or password error!");
+            location.href='${pageContext.request.contextPath}/users/register';
+        }
+        else $("#rform").submit();
+    }
     //服务器提示消息
     var errorMsg='${errorMsg2}';
     if(errorMsg!='')
@@ -82,14 +94,18 @@
     <article>
         <h1><em>小说网注册</em></h1>
         <div class="main">
-            <form action="/users/register">
+            <form action="/users/register" id="rform" >
                 <div class="userName">
-                    <input type="text" name="userName" placeholder="用户名" ><em>由5-8个字符组成！</em>
+                    <input type="text" name="userName" id="userName" placeholder="用户名" ><em>由5-8个字符组成！</em>
                 </div>
                 <div class="password">
-                    <input type="password" name="password" placeholder="密码"><em>使用字母、数字、符号两种及以上的组合，8-12个字符</em>
+                    <input type="password" name="password" id="password" placeholder="密码"><em>使用字母、数字、符号两种及以上的组合，8-12个字符</em>
                 </div>
-                <input type="submit" value="注册" id="one">
+                <input type="button" value="注册" id="one" onclick="check()">
+                <br>
+                <c:if test="${not empty errorMsg}">
+                    <input type="text"  style="color:red" value="${errorMsg}">
+                </c:if>
             </form>
         </div>
     </article>

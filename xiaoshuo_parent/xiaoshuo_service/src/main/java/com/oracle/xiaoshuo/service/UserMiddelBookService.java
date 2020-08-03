@@ -12,4 +12,6 @@ public interface UserMiddelBookService {
     UserMiddelBook findByBookIdUserId(Integer bookId, Integer userId);
 
     List<UserMiddelBook> findByUserId(Integer userId);
+
+    List<UserMiddelBook> findByBookId(Integer bookId);
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -62,20 +63,9 @@
             text-align: center;}
 
     </style>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/layer/layer.js"></script>
 </head>
-<script>
-    //服务器提示消息
-    var errorMsg='${errorMsg2}';
-    if(errorMsg!='')
-    {
-        layer.msg(errorMsg,{
-            time:2000,
-            skin:'errorMsg'
-        })
-    }
-</script>
 <body>
 <div class="wrapper">
     <article>
@@ -89,6 +79,10 @@
                     <input type="password" name="password" placeholder="密码"><em>使用字母、数字、符号两种及以上的组合，8-12个字符</em>
                 </div>
                     <input type="submit" value="登录" id="one">
+                <br>
+                <c:if test="${not empty errorMsg}">
+                    <input type="text"  style="color:red" value="${errorMsg}">
+                </c:if>
             </form>
         </div>
     </article>

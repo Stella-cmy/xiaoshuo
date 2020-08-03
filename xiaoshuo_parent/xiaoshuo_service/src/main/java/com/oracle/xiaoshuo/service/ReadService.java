@@ -16,12 +16,20 @@ public interface ReadService {
 
     void updateContext(String context, Integer bookId, Integer sectionId);
 
-    void insertOne(String context, Integer bookId, Integer sectionId);
+    void reply(String context,Integer userId, Integer bookId, Integer replyId);
+
+    void insertOneNew(String context, Integer bookId);
 
     void savePingLun(String pinglun, Integer userId,Integer bookId);
 
     List<Conment> findAllConment(Integer userId);
 
+    List<Conment> findAllLouZhu(Integer bookId);
+
+    List<Conment> findAllLouXia(Integer replyId);
+
     void deletePingLun(Integer conmentId);
+
+    List<Conment> findAllConmentByBook(Integer bookId);
 
 }

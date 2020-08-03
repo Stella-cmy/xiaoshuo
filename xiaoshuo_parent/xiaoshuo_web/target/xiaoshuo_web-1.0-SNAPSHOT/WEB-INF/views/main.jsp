@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: 13129
-  Date: 2020/2/24
-  Time: 2:59
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
@@ -13,7 +6,7 @@
     <meta charset="UTF-8">
     <title></title>
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/basic.css" >
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.3.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js" ></script>
     <div id="topOne">
 
@@ -26,7 +19,7 @@
        <%-- <div class="logo1"><a href="#"><img src="${pageContext.request.contextPath}/images/logo.png"></a></div>--%>
         <div class="user">
             <c:if test="${not empty user}">
-                欢迎您：${user.username}
+                <img src="${pageContext.request.contextPath}/images/${user.pic}" alt="" width="60px" height="60px"> ${user.username}
             </c:if>
             <c:if test="${empty user}">
                 <font><a href="${pageContext.request.contextPath}/users/login">登录&nbsp;&nbsp;&nbsp;|</a></font>
@@ -63,23 +56,23 @@
             </div>
             <div class="flash">
                 <!--左右切换按扭-->
-               <!-- <a href="javascript:void(0)" class="prev"></a>
-                <a href="javascript:void(0)" class="next"></a>-->
+               <a href="javascript:void(0)" class="prev"></a>
+                <a href="javascript:void(0)" class="next"></a>
 
                 <!--图片滚动部分-->
                 <div class="scroll">
-                    <img src="${pageContext.request.contextPath}/images/wuhan.jpg" width="100%" height="100%"/>
+                    <img src="${pageContext.request.contextPath}/images/koujue.jpg" width="100%" height="100%"/>
                     <img src="${pageContext.request.contextPath}/images/q_one.jpg" width="100%" height="100%"/>
                     <img src="${pageContext.request.contextPath}/images/woyufengtian.jpg" width="100%" height="100%" />
                     <img src="${pageContext.request.contextPath}/images/zetianji.jpg" width="100%" height="100%"/>
                     <img src="${pageContext.request.contextPath}/images/two.jpg" width="100%" height="100%"/>
                     <img src="${pageContext.request.contextPath}/images/doupocangqion.jpg" width="100%" height="100%"/>
-                    <img src="${pageContext.request.contextPath}/images/two.jpg" width="100%" height="100%"/>
+                    <img src="${pageContext.request.contextPath}/images/xishou.jpg" width="100%" height="100%"/>
                 </div>
-
                 <!--滚动按扭部分-->
                 <div class="But">
                     <span class="hover"></span>
+                    <span></span>
                     <span></span>
                     <span></span>
                     <span></span>

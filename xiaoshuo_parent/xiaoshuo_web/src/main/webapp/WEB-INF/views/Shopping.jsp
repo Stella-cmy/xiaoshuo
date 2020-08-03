@@ -10,7 +10,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/basic.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/Shopping.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.3.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
@@ -73,10 +73,13 @@
                 </div>
             </div>
         </form>
+        <c:if test="${not empty errorMsg}">
+            <input type="text"  style="color:red;width: 300px" value="${errorMsg}">
+        </c:if>
     </div>
     <div class="user">
         <c:if test="${not empty user}">
-            欢迎您：${user.username}
+            <img src="${pageContext.request.contextPath}/images/${user.pic}" alt="" width="60px" height="60px"> ${user.username}
         </c:if>
         <c:if test="${empty user}">
             <font><a href="${pageContext.request.contextPath}/users/login">登录&nbsp;&nbsp;&nbsp;|</a></font>

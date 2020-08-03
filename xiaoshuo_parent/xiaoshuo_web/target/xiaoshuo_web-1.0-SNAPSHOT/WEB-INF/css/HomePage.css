@@ -128,13 +128,13 @@
 }
 .qianbao{
     width: 29%;
-    height: 260px;
+    height: 320px;
    // background: #660000;
     float: right;
 }
 .qianbao p{
     width: 80%;
-    height: 80px;
+    height: 55px;
   //  background: hotpink;
     text-align:center ;
     font-size: 30px;
@@ -145,26 +145,28 @@
 }
 .qianbao span{
     width: 100px;
-    height: 50px;
+    height: 45px;
    // background: #98FB98;
    margin-left: 50px;
     font-size: 28px;
 }
 .qianbao .money1{
     width: 150px;
-    height: 50px;
+    height: 40px;
    // background: #00A1D2;
     font-size: 20px;
-    margin: 30px;
+    margin: 25px;
 }
+
 .qianbao_p{
-    background: #ed145b;
+    background: #ed1945;
 }
 .xinxi{
     width: 29%;
-    height: 300px;
+    height: 240px;
     //background: #98FB98;
     float: right;
+    margin-top: 10px;
 }
 .xinxi_p{
     width: 100%;
@@ -172,19 +174,19 @@
    // background: red;
     font-size: 20px;
     text-align: center;
-
+    margin-top: 10px;
 }
-.xinxi_form{
+.xinxi_form1{
 width: 80%;
-    height: 250px;
+    height: 230px;
    // background: #00A1D2;
     margin: 30px;
     text-align: center;
 }
-.xinxi_form p{
+.xinxi_form1 p{
     font-size: 20px;
 }
-.xinxi_form input{
+.xinxi_form1 input{
     width: 65%;
     height: 30px;
     border: 1px solid #CCCCCC;
@@ -192,9 +194,31 @@ width: 80%;
 }
 .submit_xinxi{
     width: 100px;
-    height: 50px;
-    margin-top: 30px;
+    height: 40px;
+    margin-top: 15px;
 
+}
+.xinxi2{
+    width: 29%;
+    height: 60px;
+//background: #98FB98;
+    float: right;
+    margin-top: 10px;
+}
+.xinxi2_form2{
+    width: 80%;
+    height: 50px;
+// background: #00A1D2;
+    text-align: center;
+}
+.xinxi2_form2 input{
+    width: 65%;
+    height: 30px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+}
+.xinxi2_form2 p{
+    font-size: 20px;
 }
 .like{
     width: 100%;
@@ -231,4 +255,74 @@ width: 80%;
 }
 .books li p:hover{
     color: red;
+}
+.pinglun\&reply{
+
+    width: 100%;
+    height: 400px;
+//background: #ed145b;
+    margin-top: 20px;
+    display: none;
+}
+.see_pinglun{
+    width: 70%;
+    height: 400px;
+// background: #98FB98;
+    border: 1px solid #333333;
+    border-radius: 30px;
+    float: left;
+    overflow:scroll;
+}
+.see_pinglun::-webkit-scrollbar {
+    display: none;/*隐藏滚动条*/
+}
+.h21{
+    width: 20%;
+    height: 50px;
+// background: green;
+    margin-top: 30px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 45px;
+    border: 1px solid #333333;
+    border-radius: 30px;
+
+}
+.h21:hover{
+    background: palevioletred;
+}
+.see_pinglun li{
+    width: 90%;
+    height: 70px;
+    background: rgba(0,0,0,0.06);
+    border: 1px solid #999999;
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 15px;
+    line-height: 30px;
+}
+.rpl{
+    width: 50px;
+    height: 30px;
+    float: right;
+}
+.rpl:hover{
+    background: greenyellow;
+}
+.reply{
+    width: 29%;
+    height: 340px;
+// background: #660000;
+    float: right;
+    display: none;
+}
+.reply input{
+    width: 29%;
+    height: 100px;
+    background: #ffffff;
+    border: 1px solid #CCCCCC;
+}
+.tijiao{
+    width: 50px;
+    height: 30px;
 }

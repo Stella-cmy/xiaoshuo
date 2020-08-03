@@ -31,4 +31,9 @@ public class UserMiddelBookServiceImpl implements UserMiddelBookService {
     public List<UserMiddelBook> findByUserId(Integer userId) {
         return userMiddelBookDao.findByUserId(userId);
     }
+
+    @Override
+    public List<UserMiddelBook> findByBookId(Integer bookId) {
+        return userMiddelBookDao.findByBookId(bookId);
+    }
 }

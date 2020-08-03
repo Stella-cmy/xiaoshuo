@@ -39,124 +39,124 @@
 	});
 
 
-/*首页轮播图特效*/
-var _index=0;
-var _qindex=0;
-var clearTime=null;
+    /*首页轮播图特效*/
+    var _index=0;
+    var _qindex=0;
+    var clearTime=null;
 
-var ktime=new Date();//获取当前时间
-$(".But span").mouseover(function(){
-	clearInterval(clearTime);
-	_index=$(this).index();//获取序列号
-	scrollPlay();//调用播放方法
-	_qindex=_index;//把当前的值赋作为下一次的前一个序列号
-	
-}).mouseout(function(){
-	autoPlay();
-});
+    var ktime=new Date();//获取当前时间
+    $(".But span").mouseover(function(){
+        clearInterval(clearTime);
+        _index=$(this).index();//获取序列号
+        scrollPlay();//调用播放方法
+        _qindex=_index;//把当前的值赋作为下一次的前一个序列号
 
-//右切换按扭
-$(".flash a.next").click(function(){
-	var newtime=new Date();
-	
-	if(newtime-ktime>300){
-		_index++;//序列号加1 
-		if(_index>6){
-			_index=0;
-			_qindex=6;
-		}
-		scrollPlay();
-		_qindex=_index;
+    }).mouseout(function(){
+        autoPlay();
+    });
 
-	}
-	ktime=new Date();//重新设置时间
+    //右切换按扭
+    $(".flash a.next").click(function(){
+        var newtime=new Date();
 
-});
+        if(newtime-ktime>300){
+            _index++;//序列号加1
+            if(_index>6){
+                _index=0;
+                _qindex=6;
+            }
+            scrollPlay();
+            _qindex=_index;
 
-$(".flash a.prev").click(function(){
+        }
+        ktime=new Date();//重新设置时间
 
-	_index--;
-	if(_index<0){
-		_qindex=0;
-		_index=6;
-	}
-		scrollPlay();
-	_qindex=_index;
-});
+    });
 
+    $(".flash a.prev").click(function(){
 
-
-$("a.next,a.prev").hover(function(){
-	clearInterval(clearTime);
-},function(){
-	autoPlay();
-});
-
-autoPlay();
-//自动轮播
-function autoPlay(){_index=-1;
-	clearTime=setInterval(function(){
-		_index++;//序列号加1 
-
-		if(_index>6){
-			_index=0;
-			_qindex=6;
-		}
-		scrollPlay();
-		_qindex=_index;
-
-	},2000);
-	
-
-}
+        _index--;
+        if(_index<0){
+            _qindex=0;
+            _index=6;
+        }
+        scrollPlay();
+        _qindex=_index;
+    });
 
 
-function scrollPlay(){
-	$(".But span").eq(_index).addClass("hover").siblings("span").removeClass("hover");
-	if(_index==0 && _qindex==6){
-		next();
-	}else if(_index==6 && _qindex==0){
-		prev();
-	}else if(_index>_qindex){//左移
-		next();
-	}else if(_index<_qindex){//往右移
-		prev();
-	}
 
-}
+    $("a.next,a.prev").hover(function(){
+        clearInterval(clearTime);
+    },function(){
+        autoPlay();
+    });
 
-//下一张，左移
-function next(){
-		$(".scroll img").eq(_qindex).animate({"left":"-820px"},300);
-		$(".scroll img").eq(_index).css("left","820px").animate({"left":"0px"},300);
+    autoPlay();
+    //自动轮播
+    function autoPlay(){
+        clearTime=setInterval(function(){
+            _index++;//序列号加1
 
-};
+            if(_index>6){
+                _index=0;
+                _qindex=6;
+            }
+            scrollPlay();
+            _qindex=_index;
 
-//上一张 ，右移
-function prev(){
-		$(".scroll img").eq(_qindex).animate({"left":"820px"},300);
-		$(".scroll img").eq(_index).css("left","-820px").animate({"left":"0px"},300);
-}
-//按扭显示隐藏
-$(".flash").hover(function(){
-	//显示
-	$("a.prev,a.next").show();
-},function(){
-	//隐藏
-	$("a.prev,a.next").hide();
-});
-function setTab(name,cursel){
-	cursel_0=cursel;
-	for(var i=1; i<=links_len; i++){
-		var menu = document.getElementById(name+i);
-		var menudiv = document.getElementById("con_"+name+"_"+i);
-		if(i==cursel){
-			menu.className="off";
-			menudiv.style.display="block";
-		}
-		else{
-			menu.className="";
-			menudiv.style.display="none";
-		}
-	}
-}
+        },2000);
+
+
+    }
+
+
+    function scrollPlay(){
+        $(".But span").eq(_index).addClass("hover").siblings("span").removeClass("hover");
+        if(_index==0 && _qindex==6){
+            next();
+        }else if(_index==6 && _qindex==0){
+            prev();
+        }else if(_index>_qindex){//左移
+            next();
+        }else if(_index<_qindex){//往右移
+            prev();
+        }
+
+    }
+
+    //下一张，左移
+    function next(){
+        $(".scroll img").eq(_qindex).animate({"left":"-820px"},300);
+        $(".scroll img").eq(_index).css("left","820px").animate({"left":"0px"},300);
+
+    };
+
+    //上一张 ，右移
+    function prev(){
+        $(".scroll img").eq(_qindex).animate({"left":"820px"},300);
+        $(".scroll img").eq(_index).css("left","-820px").animate({"left":"0px"},300);
+    }
+    //按扭显示隐藏
+    $(".flash").hover(function(){
+        //显示
+        $("a.prev,a.next").show();
+    },function(){
+        //隐藏
+        $("a.prev,a.next").hide();
+    });
+    function setTab(name,cursel){
+        cursel_0=cursel;
+        for(var i=1; i<=links_len; i++){
+            var menu = document.getElementById(name+i);
+            var menudiv = document.getElementById("con_"+name+"_"+i);
+            if(i==cursel){
+                menu.className="off";
+                menudiv.style.display="block";
+            }
+            else{
+                menu.className="";
+                menudiv.style.display="none";
+            }
+        }
+    }

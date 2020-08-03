@@ -42,8 +42,14 @@ public class ReadServiceImpl implements ReadService {
     }
 
     @Override
-    public void insertOne(String context, Integer bookId, Integer sectionId) {
-        sectionDao.insertOne(context,bookId,sectionId);
+    public void reply(String context,Integer userId, Integer bookId, Integer replyId) {
+        pingLunDao.reply(context,bookId,userId,replyId);
+    }
+
+
+    @Override
+    public void insertOneNew(String context, Integer bookId) {
+        sectionDao.insertOneNew(context,bookId);
     }
 
     @Override
@@ -57,8 +63,25 @@ public class ReadServiceImpl implements ReadService {
     }
 
     @Override
+    public List<Conment> findAllLouZhu(Integer bookId) {
+        return pingLunDao.findAllLouZhu(bookId);
+    }
+
+    @Override
+    public List<Conment> findAllLouXia(Integer replyId) {
+        return pingLunDao.findAllLouXia(replyId);
+    }
+
+    @Override
     public void deletePingLun(Integer conmentId) {
         pingLunDao.deletePingLun(conmentId);
+    }
+
+    @Override
+    public List<Conment> findAllConmentByBook(Integer bookId) {
+        List<Conment> l = pingLunDao.findAllConmentByBook(bookId);
+        System.out.println(l);
+        return l;
     }
 
 

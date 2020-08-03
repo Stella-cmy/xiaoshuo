@@ -21,4 +21,6 @@
     <mvc:resources mapping="/js/**" location="/WEB-INF/js/"></mvc:resources>
     <mvc:resources mapping="/images/**" location="/WEB-INF/images/"></mvc:resources>
     <mvc:resources mapping="/layer/**" location="/WEB-INF/layer/"></mvc:resources>
+    <!--文件上传-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 </beans>

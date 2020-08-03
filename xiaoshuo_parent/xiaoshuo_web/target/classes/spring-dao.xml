@@ -7,7 +7,7 @@
           http://www.springframework.org/schema/context/spring-context.xsd">
     <!--获取数据库连接信息-->
     <context:property-placeholder location="classpath:dataSource.properties"/>
-    <context:component-scan base-package="com.itcast.xiaoshuo.dao"/>
+    <context:component-scan base-package="com.oracle.xiaoshuo.dao"/>
     <!--配置数据源-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}"></property>
@@ -18,11 +18,11 @@
     <!--配置sqlsessionFactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
-        <property name="typeAliasesPackage" value="com.itcast.zshop.pojo"></property>
+        <property name="typeAliasesPackage" value="com.oracle.zshop.pojo"></property>
     </bean>
     <!--配置代理对象-->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <property name="basePackage" value="com.itcast.xiaoshuo.dao"/>
+        <property name="basePackage" value="com.oracle.xiaoshuo.dao"/>
     </bean>
 </beans>

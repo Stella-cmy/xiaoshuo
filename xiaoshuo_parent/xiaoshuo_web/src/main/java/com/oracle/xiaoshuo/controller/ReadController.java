@@ -1,24 +1,26 @@
 package com.oracle.xiaoshuo.controller;
 
 import com.oracle.xiaoshuo.common.exception.ReachException;
-import com.oracle.xiaoshuo.pojo.Books;
-import com.oracle.xiaoshuo.pojo.Section;
-import com.oracle.xiaoshuo.pojo.User;
-import com.oracle.xiaoshuo.pojo.UserMiddelBook;
+import com.oracle.xiaoshuo.common.exception.UserException;
+import com.oracle.xiaoshuo.pojo.*;
 import com.oracle.xiaoshuo.service.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
 @RequestMapping("/reads")
 public class ReadController {
     private static int bookIds=0;
+    private static Calendar ban = new GregorianCalendar(2020,04,04);//这是5月4日
+    private static boolean flash = true;
     @Autowired
     private ReadService readService;
     @Autowired
@@ -32,6 +34,53 @@ public class ReadController {
     @RequestMapping("/read")
     public String read(@Param("bookId") Integer bookId, HttpSession session)
     {
+        /*//修改书籍月榜与周榜
+        Books tBook = bookService.findById(bookId);
+        Integer yuebang = tBook.getReadYueBang();
+        Integer zhoubang = tBook.getReadZhouBang();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //判断是否同一月
+        String riqi = sdf.format(ban.getTime());
+        String now = sdf.format(new Date());
+        if(now.substring(0,7).equals(riqi.substring(0,7))==false&&now.substring(8,10).equals("01")==true&&flash==false)//新的一月且尚未更新
+        {
+            bookService.updateReadYue(bookId,1);flash=true;//已进行更改
+        }
+        else bookService.updateReadYue(bookId,yuebang+1);
+        //判断是否是同一周
+        Calendar d2 = Calendar.getInstance();
+        int day1= ban.get(Calendar.DAY_OF_YEAR);
+        int day2 = d2.get(Calendar.DAY_OF_YEAR);
+        int year1 = ban.get(Calendar.YEAR);
+        int year2 = d2.get(Calendar.YEAR);
+        int days = 0;
+        if(year1 != year2)   //不同一年
+        {
+            int timeDistance = 0 ;
+            for(int i = year1 ; i < year2 ; i ++)
+            {
+                if(i%4==0 && i%100!=0 || i%400==0)    //闰年
+                {
+                    timeDistance += 366;
+                }
+                else    //不是闰年
+                {
+                    timeDistance += 365;
+                }
+            }
+
+            days = timeDistance + (day2-day1) ;
+        }
+        else    //同一年
+        {
+            System.out.println("判断day2 - day1 : " + (day2-day1));
+            days = day2-day1;
+        }
+        if(days%7==0&&zhoubang!=1)
+        {
+
+        }
+*/
         if(ReadController.bookIds==0) ReadController.bookIds=bookId;
         session.setAttribute("lastBookId",ReadController.bookIds);
         Books book= shoppingService.findById(bookId);
@@ -41,22 +90,51 @@ public class ReadController {
         session.setAttribute("sections",sections);
         //获取书架
         User user= (User) session.getAttribute("user");
-        UserMiddelBook bookMark = userMiddelBookService.findByBookIdUserId(bookId,user.getUserId());
-        if(bookMark!=null) session.setAttribute("bookMark",bookMark);
+        if(user!=null)
+        {
+            UserMiddelBook bookMark = userMiddelBookService.findByBookIdUserId(bookId,user.getUserId());
+            if(bookMark!=null)
+            {
+                int a=1;
+                for(Section ss:sections)
+                {
+                    if(ss.getSectionId().compareTo(bookMark.getSectionId())!=0)  a++;
+                    else break;
+                }
+                System.out.println("This is "+a+" sector on bookmark.");
+                session.setAttribute("bookMark",bookMark);
+                session.setAttribute("bookMarkCount",a);
+            }
+        }
+        //获取评论
+        //先找楼主，在每个楼主下找回复
+        List<Conment> louZhu = readService.findAllLouZhu(bookId);
+        System.out.println("louZhu-->"+louZhu);
+        List<Conment> all = new ArrayList<Conment>();
+        for(Conment c:louZhu)
+        {
+            if(c!=null) all.add(c);
+            List<Conment> m = null;
+            m = readService.findAllLouXia(c.getConmentId());
+            if(m!=null&&!m.isEmpty()) all.addAll(m);
+        }
+        System.out.println("allComments-->"+all);
+        session.setAttribute("conmentsY",all);
         return "read";
     }
     @RequestMapping("/finByBookName")
-    public String finByBookName(@Param("bookName")String bookName, HttpSession session) {
+    public String finByBookName(@Param("bookName")String bookName, RedirectAttributes attr, HttpSession session) {
         try {
             System.out.println(bookName);
             Books book = shoppingService.findByBookName(bookName);
             System.out.println("book--->"+book);
                 session.setAttribute("thisBook", book);
-                return "read";
-        } catch (ReachException ex) {
-            session.setAttribute("errorMsg", ex.getMessage());
+                return "redirect:read?bookId="+book.getBookId();
+        } catch (Exception ex) {
+            attr.addFlashAttribute("errorMsg", "The novel name does not exist!");
             return "redirect:/shop/books?bookTypeId="+1;
         }
+
     }
     @RequestMapping("/section")
     public String section(@Param("bookId") Integer bookId,HttpSession session)
@@ -69,7 +147,7 @@ public class ReadController {
         return "read";
     }
     @RequestMapping(value = "/content")
-    public String content(@Param("sectionId") Integer sectionId,@Param("bookId") Integer bookId, HttpSession session){
+    public String content(@Param("sectionId") Integer sectionId,@Param("bookId") Integer bookId,HttpSession session){
         ReadController.bookIds=bookId;
         System.out.println("content----bookId>"+ bookId);
         System.out.println("content----sectionId>"+ sectionId);
@@ -78,8 +156,13 @@ public class ReadController {
         Section section1=readService.findBySectionId(sectionId,bookId);
         session.setAttribute("section",section1);
         int free=0;
-        Section minSec = (Section)session.getAttribute("minSection");
-        System.out.println("minSection---"+minSec.getSectionId());
+        List<Section> sections= readService.findByBookId(bookId);
+        int se=1;
+        for(Section ss:sections)
+        {
+            if(ss.getSectionId().compareTo(section1.getSectionId())!=0)  se++;
+            else break;
+        }
         if(session.getAttribute("user")!=null)//登录
         {
             User user= (User) session.getAttribute("user");
@@ -90,11 +173,12 @@ public class ReadController {
             {
                 if(userMiddelBook.getMaxSectionId()>=sectionId) free=1;//查看买到了哪一章
             }
-            else if(sectionId-minSec.getSectionId() < 20) free=1;//若书架上没有，只能看前20章
+            else if(se<=20) free=1;//若书架上没有，只能看前20章
         }
         else
-        {if(sectionId-minSec.getSectionId() < 20) free=1;}//未登录，只能看前20章
+        {if(se<=20) free=1;}//未登录，只能看前20章
         session.setAttribute("free",free);
+        session.setAttribute("count",se);
         return "read";
     }
     @RequestMapping("/buyBook")
@@ -111,6 +195,12 @@ public class ReadController {
                     Integer y = userMiddelBook.getSectionId();
                     userMiddelBookService.updateBook(bookId,user.getUserId(),y,sectionId);
                     model.addAttribute("errorMsg2", "Purchase successful!");
+                    try {
+                        user= userService.login(user.getUsername(),user.getPassword());
+                    } catch (UserException e) {
+                        e.printStackTrace();
+                    }
+                    session.setAttribute("user",user);
                     return "read";
                 } else {//余额不足
                     model.addAttribute("errorMsg2", "The current account balance is insufficient, please sign in to get coins!");
@@ -131,6 +221,12 @@ public class ReadController {
                     userService.updateBalance(user);
                     userMiddelBookService.addBook(bookId, user.getUserId(), sectionId, sectionId);
                     model.addAttribute("errorMsg2", "Purchase successful! Click again to read!");
+                    try {
+                        user= userService.login(user.getUsername(),user.getPassword());
+                    } catch (UserException e) {
+                        e.printStackTrace();
+                    }
+                    session.setAttribute("user",user);
                     return "read";
                 } else {//余额不足
                     model.addAttribute("errorMsg2", "The current account balance is insufficient, please sign in to get coins!");
@@ -166,14 +262,47 @@ public class ReadController {
             return "read";
         }
     }
-    @RequestMapping("/PingLin")
+    @RequestMapping("/Pinglin")
     public String pinglun(@Param("pinglun") String pinglun,@Param("bookId") Integer bookId, HttpSession session)
     {
+        System.out.println(bookId+"---------"+pinglun);
         if(pinglun==null||pinglun=="")  return "read";
         User user= (User) session.getAttribute("user");
         Integer userId = user.getUserId();
         System.out.println("user "+userId+" book "+bookId+" add comment "+pinglun);
         readService.savePingLun(pinglun,userId,bookId);
+        List<Conment> louZhu = readService.findAllLouZhu(bookId);
+        List<Conment> all = null;
+        for(Conment c:louZhu)
+        {
+            all.add(c);
+            List<Conment> m = null;
+            m = readService.findAllLouXia(c.getBookId());
+            if(m!=null&&!m.isEmpty()) all.addAll(m);
+        }
+        System.out.println(all);
+        session.setAttribute("conmentsY",all);
+        return "read";
+    }
+    @RequestMapping("/reply")
+    public String reply(@Param("replyContext") String replyContext,@Param("bookId") Integer bookId,@Param("replyId")Integer replyId, HttpSession session)
+    {
+        if(replyContext==null||replyContext=="")  return "read";
+        User user= (User) session.getAttribute("user");
+        Integer userId = user.getUserId();
+        System.out.println("user "+userId+" book "+bookId+" add comment "+replyContext+" reply "+replyId);
+        readService.reply(replyContext,userId,bookId,replyId);
+        List<Conment> louZhu = readService.findAllLouZhu(bookId);
+        List<Conment> all = null;
+        for(Conment c:louZhu)
+        {
+            all.add(c);
+            List<Conment> m = null;
+            m = readService.findAllLouXia(c.getBookId());
+            if(m!=null&&!m.isEmpty()) all.addAll(m);
+        }
+        System.out.println(all);
+        session.setAttribute("conmentsY",all);
         return "read";
     }
 }

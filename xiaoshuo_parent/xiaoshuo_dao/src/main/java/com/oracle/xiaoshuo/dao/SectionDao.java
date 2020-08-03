@@ -30,4 +30,7 @@ public interface SectionDao {
     @Select("select * from section where section_id = (select max(section_id) from section)")
     @ResultMap("SectionMap")
     Section findLastSection();
+    @Insert("insert into section(book_id,section_content) values(#{bookId},#{context})")
+    void insertOneNew(@Param("context") String context, @Param("bookId") Integer bookId);
+
 }
